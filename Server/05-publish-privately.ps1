@@ -16,13 +16,13 @@ $imageVersion = Get-ImageVersion $OctopusVersion
 Start-TeamCityBlock "Publish to private repo"
 
 function Set-Tag($tag) {
-  Write-Host "docker tag 'octopusdeploy/octopusdeploy-prerelease:$imageVersion' '$tag'"
-  & docker tag "octopusdeploy/octopusdeploy-prerelease:$imageVersion" "$tag"
+  Write-Host "docker tag 'octopusdeploy/octopusdeploy-prerelease:$imageVersion-1803' '$tag'"
+  & docker tag "octopusdeploy/octopusdeploy-prerelease:$imageVersion-1803" "$tag"
   if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
 
 Docker-Login
 
-Push-Image "octopusdeploy/octopusdeploy-prerelease:$imageVersion"
+Push-Image "octopusdeploy/octopusdeploy-prerelease:$imageVersion-1803"
 
 Stop-TeamCityBlock "Publish to private repo"

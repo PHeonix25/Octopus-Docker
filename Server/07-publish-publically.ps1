@@ -14,15 +14,15 @@ Confirm-RunningFromRootDirectory
 Start-TeamCityBlock "Pushing to public repo"
 
 function Set-Tag($tag) {
-  Write-Host "docker tag 'octopusdeploy/octopusdeploy-prerelease:$OctopusVersion' '$tag'"
-  & docker tag "octopusdeploy/octopusdeploy-prerelease:$OctopusVersion" "$tag"
+  Write-Host "docker tag 'octopusdeploy/octopusdeploy-prerelease:$OctopusVersion-1803' '$tag'"
+  & docker tag "octopusdeploy/octopusdeploy-prerelease:$OctopusVersion-1803" "$tag"
   if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
 
 Docker-Login
 
-Set-Tag "octopusdeploy/octopusdeploy:$OctopusVersion"
-Push-Image "octopusdeploy/octopusdeploy:$OctopusVersion"
+Set-Tag "octopusdeploy/octopusdeploy:$OctopusVersion-1803"
+Push-Image "octopusdeploy/octopusdeploy:$OctopusVersion-1803"
 
 $gitBranch = Get-GitBranch
 
@@ -33,8 +33,8 @@ if ($gitBranch -ne 'master') {
   $latestVersion = (Invoke-RestMethod "https://octopus.com/downloads/latest/WindowsX64/OctopusServer/version").Version
   if ($latestVersion -eq $OctopusVersion) {
     Write-Host "Tagging as latest as $latestVersion is the most recent version"
-    Set-Tag "octopusdeploy/octopusdeploy:latest"
-    Push-Image "octopusdeploy/octopusdeploy:latest"
+    Set-Tag "octopusdeploy/octopusdeploy:1803"
+    Push-Image "octopusdeploy/octopusdeploy:1803"
   } else {
     Write-Warning "Not tagging as latest as $OctopusVersion is not the latest version ($latestVersion is the most recent version)"
   }
