@@ -14,15 +14,15 @@ Confirm-RunningFromRootDirectory
 Start-TeamCityBlock "Pushing to public repo"
 
 function Set-Tag($tag) {
-  Write-Host "docker tag 'octopusdeploy/octopusdeploy-prerelease:$OctopusVersion-1803' '$tag'"
-  & docker tag "octopusdeploy/octopusdeploy-prerelease:$OctopusVersion-1803" "$tag"
+  Write-Host "docker tag 'octopusdeploy/octopusdeploy-prerelease:$OctopusVersion' '$tag'"
+  & docker tag "octopusdeploy/octopusdeploy-prerelease:$OctopusVersion" "$tag"
   if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
 
 Docker-Login
 
-Set-Tag "octopusdeploy/octopusdeploy:$OctopusVersion-1803"
-Push-Image "octopusdeploy/octopusdeploy:$OctopusVersion-1803"
+Set-Tag "octopusdeploy/octopusdeploy:$OctopusVersion"
+Push-Image "octopusdeploy/octopusdeploy:$OctopusVersion"
 
 $gitBranch = Get-GitBranch
 
