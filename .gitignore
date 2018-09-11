@@ -49,3 +49,7 @@ tests/Logs
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Intellij
+.idea
+*.iml

@@ -1,4 +1,4 @@
-FROM microsoft/windowsservercore:latest
+FROM microsoft/windowsservercore:1803
 
 HEALTHCHECK --interval=20s --timeout=20s --retries=6 CMD powershell -file ./Server/healthcheck-server.ps1
 
