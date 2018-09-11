@@ -17,8 +17,8 @@ if(!(Test-Path .\Source)) {
   mkdir .\Source | Out-Null
 }
 
-Write-Host "docker pull microsoft/windowsservercore:latest"
-& docker pull microsoft/windowsservercore:latest
+Write-Host "docker pull microsoft/windowsservercore:1803"
+& docker pull microsoft/windowsservercore:1803
 if ($LASTEXITCODE -ne 0) {
   exit $LASTEXITCODE
 }
@@ -32,7 +32,7 @@ $attemptNumber = 0
 while ($true) {
   $attemptNumber = $attemptNumber + 1
   write-host "Attempt #$attemptNumber to build container..."
-  $result = Execute-Command "docker" "build --tag octopusdeploy/octopusdeploy-prerelease:$imageVersion --build-arg OctopusVersion=$OctopusVersion --file Server\Dockerfile ."
+  $result = Execute-Command "docker" "build --tag octopusdeploy/octopusdeploy-prerelease:$imageVersion-1803 --build-arg OctopusVersion=$OctopusVersion --file Server\Dockerfile ."
   $result.stdout > ".\Logs\server-stdout-attempt-$attemptNumber.log"
   $result.stderr > ".\Logs\server-stderr-$attemptNumber.log"
   if ($result.stderr -like "*encountered an error during Start: failure in a Windows system call: This operation returned because the timeout period expired. (0x5b4)*") {
