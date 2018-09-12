@@ -17,8 +17,8 @@ if(!(Test-Path .\Source)) {
   mkdir .\Source | Out-Null
 }
 
-Write-Host "docker pull microsoft/windowsservercore:1803"
-& docker pull microsoft/windowsservercore:1803
+Write-Host "docker pull microsoft/windowsservercore:1709"
+& docker pull microsoft/windowsservercore:1709
 if ($LASTEXITCODE -ne 0) {
   exit $LASTEXITCODE
 }
